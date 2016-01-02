@@ -1,0 +1,258 @@
+/*
+* Copyright (c) 2015, Daniel Doboga
+* All rights reserved.
+* 	
+* Redistribution and use in source and binary forms, with or without modification, 
+* are permitted provided that the following conditions are met:
+* 
+*   1. Redistributions of source code must retain the above copyright notice, this 
+*   list of conditions and the following disclaimer.
+*   
+*   2. Redistributions in binary form must reproduce the above copyright notice, this 
+*   list of conditions and the following disclaimer in the documentation and/or other 
+*   materials provided with the distribution.
+* 
+* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
+* ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+* IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+* INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+* NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+* PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+* WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+* ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+* POSSIBILITY OF SUCH DAMAGE.
+*/
+
+#dynamicQueryDiv {
+    margin: 10px 0px 10px 0px;
+    border: inset;
+    border-color: beige;
+    background-color: cornsilk;
+    height: 400px;
+    width: 700px;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+#dynamicQueryDiv div {
+    float: left;
+    cursor: pointer;
+}
+#infiniqueryResultsDiv {
+    margin: 10px 0px 10px 0px;
+    position:absolute;
+    height: 400px;
+    width: 700px;
+    overflow-x:auto;
+    overflow-y:auto;
+    background-color: #E7EBDF;
+    border: 1px solid beige;
+    visibility:hidden;
+    left:0px;
+    top:0px;
+    font-size: 14px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+}
+#infiniqueryResultsTable {
+}
+.infiniqueryResultsTableHeaderCell {
+	background-color: #C9CFBC;
+    vertical-align: top;
+	font-weight: bold;
+}
+.infiniqueryResultsTableOddCell {
+    background-color: #d3d3d3;
+    vertical-align: top;
+}
+.infiniqueryResultsTableEvenCell {
+    background-color: #e4e4e4;
+    vertical-align: top;
+}
+.infiniqueryResultsDivCloseButton {
+	width: 70px;
+	height:20px;
+}
+#autocompleteTextDiv {
+    position:absolute;
+    width:200px;
+    overflow-y:auto;
+    visibility:hidden;
+    left:0px;
+    top:0px;
+}
+#autocompleteTextTable {
+    width:200px;
+}
+.autocompleteTextTableOddCell {
+    background-color: #d3d3d3;
+}
+.autocompleteTextTableEvenCell {
+    background-color: #e4e4e4;
+}
+#autocompleteTextDiv {
+    position:absolute;
+    width:200px;
+    overflow-y:auto;
+    visibility:hidden;
+    left:0px;
+    top:0px;
+}
+#autocompleteTextTable {
+    width:200px;
+}
+.autocompleteTextTableOddCell {
+    background-color: #d3d3d3;
+}
+.autocompleteTextTableEvenCell {
+    background-color: #e4e4e4;
+}
+#autocompleteReferenceDataDiv {
+	position:absolute;
+	width:200px;
+	height:120px;
+	visibility:hidden;
+	align:right;
+}
+#autocompleteReferenceDataSelect {
+	width:200px;
+	height:100px;
+	overflow-x:auto;
+	overflow-y:auto;
+}
+#autocompleteReferenceDataButton {
+	width: 70px;
+	height:20px;
+}
+#contextMenuDiv {
+    position:absolute;
+    width:250px;
+    overflow-y:auto;
+    visibility:hidden;
+    left:0px;
+    top:0px;
+}
+.contextMenuDivEntity {
+    position:absolute;
+    width:250px;
+    color: #BF0808;
+    overflow-y:auto;
+    left:0px;
+    top:0px;
+}
+.contextMenuDivAttribute {
+    position:absolute;
+    width:250px;
+    color: #E65353;
+    overflow-y:auto;
+    left:0px;
+    top:0px;
+}
+.contextMenuDivOperator {
+    position:absolute;
+    width:250px;
+    color: #0617CF;
+    overflow-y:auto;
+    left:0px;
+    top:0px;
+}
+.contextMenuDivValue {
+    position:absolute;
+    width:250px;
+    color: #518531;
+    overflow-y:auto;
+    left:0px;
+    top:0px;
+}
+.contextMenuDivConditionSeparator {
+    position:absolute;
+    width:250px;
+    color: #0617CF;
+    overflow-y:auto;
+    left:0px;
+    top:0px;
+}
+.contextMenuDivBracket {
+    position:absolute;
+    width:250px;
+    color: #E8000C;
+    overflow-y:auto;
+    left:0px;
+    top:0px;
+}
+#contextMenuTable {
+    width:250px;
+    background-color: inherit;
+}
+.contextTableOddCell {
+    background-color: #e9e5b5;
+}
+.contextTableEvenCell {
+    background-color: #e9e5b5;
+}
+#input {
+    width:100px;
+}
+.findKeyword {
+    color: #0617CF;
+    font: inherit;
+    font-style: italic;
+    height: 20px;
+    padding: 2px 3px 2px 2px;
+}
+.havingKeyword {
+    color: #0617CF;
+    font: inherit;
+    font-style: italic;
+    height: 20px;
+    padding: 2px 3px 2px 2px;
+}
+.operatorKeyword {
+    color: #0617CF;
+    font: inherit;
+    font-style: italic;
+    height: 20px;
+    padding: 2px 3px 2px 2px;
+}
+.conditionSeparatorKeyword {
+    color: #0617CF;
+    font: inherit;
+    font-style: italic;
+    height: 20px;
+    padding: 2px 3px 2px 2px;
+}
+.openBracket {
+    color: #E8000C;
+    font: inherit;
+    font-style: italic;
+    height: 20px;
+    padding: 2px 3px 2px 2px;
+}
+.closeBracket {
+    color: #E8000C;
+    font: inherit;
+    font-style: italic;
+    height: 20px;
+    padding: 2px 3px 2px 2px;
+}
+.entityName {
+    color: #BF0808;
+    font: inherit;
+    font-style: italic;
+    height: 20px;
+    padding: 2px 3px 2px 2px;
+}
+.entityAttributeName {
+    color: #E65353;
+    font: inherit;
+    font-style: italic;
+    height: 20px;
+    padding: 2px 3px 2px 2px;
+}
+.entityAttributeValue {
+    color: #518531;
+    font: inherit;
+    font-style: italic;
+    height: 20px;
+    padding: 2px 3px 2px 2px;
+}

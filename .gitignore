@@ -1,0 +1,8 @@
+*.class
+*.log
+*.classpath
+*.project
+*.settings
+*.lck
+infiniquerydemodb.script
+*target*

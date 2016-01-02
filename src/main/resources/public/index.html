@@ -1,0 +1,48 @@
+<!-- 
+* Copyright (c) 2015, Daniel Doboga
+* All rights reserved.
+* 	
+* Redistribution and use in source and binary forms, with or without modification, 
+* are permitted provided that the following conditions are met:
+* 
+*   1. Redistributions of source code must retain the above copyright notice, this 
+*   list of conditions and the following disclaimer.
+*   
+*   2. Redistributions in binary form must reproduce the above copyright notice, this 
+*   list of conditions and the following disclaimer in the documentation and/or other 
+*   materials provided with the distribution.
+* 
+* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
+* ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+* WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+* IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, 
+* INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT 
+* NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+* PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+* WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) 
+* ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+* POSSIBILITY OF SUCH DAMAGE.
+*/
+-->
+
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Infiniquery Demo</title>
+    <link rel="stylesheet" type="text/css" href="infiniquery.css" />
+    <script type="text/javascript" src="datetimepicker/datetimepicker_css.js"></script>
+    <script type="text/javascript" src="infiniquery.js"></script>
+</head>
+<body onload="infiniquery.startQueryCreation()">
+    <div id="dynamicQueryDiv"></div>
+
+    <input type="button" value="HTML dimension" onclick="infiniquery.displayQueryHtmlDimension()"/>
+    <input type="button" value="Plain text dimension" onclick="infiniquery.displayQueryPlainTextDimension()"/>
+    <input type="button" value="Logical dimension" onclick="infiniquery.displayQueryLogicalDimension()"/>
+    <input type="button" value="JPQL dimension" onclick="infiniquery.displayQueryJpqlDimension()"/>
+    <input type="button" value="Validate Query" onclick="infiniquery.isQueryValid()"/>
+    <input type="button" value="Execute Query" onclick="infiniquery.executeQuery()"/>
+</body>
+</html>

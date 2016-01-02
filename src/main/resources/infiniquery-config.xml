@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE query-context [
+        <!ELEMENT query-context (findKeyword|entities|results-limit)*>
+        <!ELEMENT findKeyword (#PCDATA)>
+        <!ELEMENT results-limit (#PCDATA)>
+        <!ELEMENT entities (entity)*>
+        <!ELEMENT entity (attribute)*>
+        <!ATTLIST entity
+                className CDATA #REQUIRED
+                displayName CDATA #REQUIRED
+                roles CDATA #IMPLIED>
+        <!ELEMENT attribute (#PCDATA)>
+        <!ATTLIST attribute
+                attributeName CDATA #REQUIRED
+                displayName CDATA #REQUIRED
+                possibleValueLabelAttribute CDATA #IMPLIED
+                possibleValueLabelAttributePath CDATA #IMPLIED
+                possibleValuesQuery CDATA #IMPLIED
+                roles CDATA #IMPLIED
+                displayOnly CDATA #IMPLIED>
+        ]>
+
+<query-context>
+	<findKeyword>Search for</findKeyword>
+	<results-limit>1000</results-limit>
+	<entities>
+		<entity className="org.infiniquery.demoapp.entities.Employee" displayName="Employees" roles="ADMIN, SECRETARY, MANAGER">
+			<attribute attributeName="firstName" displayName="first name"/>
+			<attribute attributeName="lastName" displayName="last name"/>
+			<attribute attributeName="expertise" displayName="areas of expertise" possibleValuesQuery="select a from ExperienceArea a" possibleValueLabelAttribute="areaName" possibleValueLabelAttributePath="expertise.experienceArea.areaName"/>
+			<attribute attributeName="role" displayName="role"/>
+			<attribute attributeName="department" displayName="department" possibleValuesQuery="select d from Department d" possibleValueLabelAttribute="departmentName" possibleValueLabelAttributePath="department.departmentName"/>
+			<attribute attributeName="birthDate" displayName="birth date" roles="ADMIN"/>
+			<attribute attributeName="careerStartedDate" displayName="career started date" roles="MANAGER"/>
+			<attribute attributeName="id" displayName="id" displayOnly="true"/>
+			<attribute attributeName="birthDateString" displayName="formatted birth date" displayOnly="true"/>
+			<attribute attributeName="careerStartedDateString" displayName="formatted career started date" displayOnly="true"/>
+		</entity>
+		<entity className="org.infiniquery.demoapp.entities.ExperienceArea" displayName="Experience area" roles="ALL">
+			<attribute attributeName="areaName" displayName="area name"/>
+		</entity>
+		<entity className="org.infiniquery.demoapp.entities.Department" displayName="department" >
+			<attribute attributeName="departmentName" displayName="department name"/>
+		</entity>
+	</entities>
+</query-context>
