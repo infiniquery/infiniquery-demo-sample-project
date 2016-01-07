@@ -6,7 +6,7 @@
 
     <groupId>infiniquery</groupId>
     <artifactId>infiniquery-demo-sample-project</artifactId>
-    <version>1.0-BETA</version>
+    <version>1.0-ALPHA</version>
     <packaging>jar</packaging>
 
     <name>Infiniquery Demo Sample Project</name>
@@ -15,8 +15,8 @@
 
     <licenses>
         <license>
-            <name>MIT License</name>
-            <url>http://www.opensource.org/licenses/mit-license.php</url>
+            <name>BSD-2-Clause</name>
+            <url>http://opensource.org/licenses/BSD-2-Clause</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
@@ -37,12 +37,12 @@
         <dependency>
             <groupId>org.infiniquery</groupId>
             <artifactId>infiniquery-core</artifactId>
-            <version>1.0-BETA</version>
+            <version>1.0-ALPHA</version>
         </dependency>
         <dependency>
             <groupId>org.infiniquery</groupId>
             <artifactId>infiniquery-web-spring</artifactId>
-            <version>1.0-BETA</version>
+            <version>1.0-ALPHA</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

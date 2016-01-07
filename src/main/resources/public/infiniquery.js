@@ -81,6 +81,7 @@ var infiniquery = {
     	resultsDiv.id = "infiniqueryResultsDiv";
     	var resultsTable = document.createElement("table");
     	resultsTable.id = "infiniqueryResultsTable";
+    	resultsTable.className = "infiniqueryResultsTable";
     	resultsDiv.appendChild(resultsTable);
     	documentBody.appendChild(resultsDiv);
     	var resultsDivCloseButton = document.createElement("input");
@@ -132,7 +133,6 @@ var infiniquery = {
             if (object.hasOwnProperty(property)) {
                 var cell = row.insertCell(0);
                 cell.innerHTML = property;
-                cell.className = "infiniqueryResultsTableHeaderCell";
             }
         }
     },
@@ -143,11 +143,6 @@ var infiniquery = {
             if (object.hasOwnProperty(property)) {
                 var cell = row.insertCell(0);
                 cell.innerHTML = object[property];
-                if(rowIndex%2 == 0) {
-                    cell.className = "infiniqueryResultsTableOddCell";
-                } else {
-                    cell.className = "infiniqueryResultsTableEvenCell";
-                }
             }
         }
     },
@@ -864,7 +859,17 @@ var infiniquery = {
     },
 
     displayQueryJpqlDimension: function () {
-    	alert("This functionality is not implemented by default. If you want it, please implemented in your application code.");
+    	//alert("This functionality is not implemented by default. If you want it, please implemented in your application code.");
+    	if(infiniquery.isQueryValid()) {
+	        var executableQuery = new infiniquery.ExecutableQuery(infiniquery.getQueryHtmlDimension(), infiniquery.getQueryPlainTextDimension(), infiniquery.getQueryLogicalDimension());
+	        var executableQueryString = JSON.stringify(executableQuery);
+	        var callback = function(jpqlDimension) {
+	        	alert(jpqlDimension);
+	        }
+	        infiniquery.ajaxRequest("/queryModel/compileQuery", "POST", callback, executableQueryString);
+    	} else {
+    		alert("Query not valid. Please ensure the sentence is complete and all brackets properly closed.");
+    	}
     },
 
     displayQueryLogicalDimension: function () {

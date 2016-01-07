@@ -40,7 +40,7 @@
     cursor: pointer;
 }
 #infiniqueryResultsDiv {
-    margin: 10px 0px 10px 0px;
+    margin: 0px 0px 0px 0px;
     position:absolute;
     height: 400px;
     width: 700px;
@@ -54,21 +54,116 @@
     font-size: 14px;
     font-family: "Comic Sans MS", cursive, sans-serif;
 }
-#infiniqueryResultsTable {
+
+/******* start of results table ***********/
+
+
+.infiniqueryResultsTable {
+	margin:0px;padding:0px;
+	width:98%;
+	box-shadow: 10px 10px 5px #888888;
+	border:1px solid #000000;
+	
+	-moz-border-radius-bottomleft:6px;
+	-webkit-border-bottom-left-radius:6px;
+	border-bottom-left-radius:6px;
+	
+	-moz-border-radius-bottomright:6px;
+	-webkit-border-bottom-right-radius:6px;
+	border-bottom-right-radius:6px;
+	
+	-moz-border-radius-topright:6px;
+	-webkit-border-top-right-radius:6px;
+	border-top-right-radius:6px;
+	
+	-moz-border-radius-topleft:6px;
+	-webkit-border-top-left-radius:6px;
+	border-top-left-radius:6px;
+}.infiniqueryResultsTable table{
+    border-collapse: collapse;
+        border-spacing: 0;
+	width:100%;
+	height:100%;
+	margin:0px;padding:0px;
+}.infiniqueryResultsTable tr:last-child td:last-child {
+	-moz-border-radius-bottomright:6px;
+	-webkit-border-bottom-right-radius:6px;
+	border-bottom-right-radius:6px;
 }
-.infiniqueryResultsTableHeaderCell {
-	background-color: #C9CFBC;
-    vertical-align: top;
-	font-weight: bold;
+.infiniqueryResultsTable table tr:first-child td:first-child {
+	-moz-border-radius-topleft:6px;
+	-webkit-border-top-left-radius:6px;
+	border-top-left-radius:6px;
 }
-.infiniqueryResultsTableOddCell {
-    background-color: #d3d3d3;
-    vertical-align: top;
+.infiniqueryResultsTable table tr:first-child td:last-child {
+	-moz-border-radius-topright:6px;
+	-webkit-border-top-right-radius:6px;
+	border-top-right-radius:6px;
+}.infiniqueryResultsTable tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:6px;
+	-webkit-border-bottom-left-radius:6px;
+	border-bottom-left-radius:6px;
+}.infiniqueryResultsTable tr:hover td{
+	background-color:#baba64;
+		
+
 }
-.infiniqueryResultsTableEvenCell {
-    background-color: #e4e4e4;
-    vertical-align: top;
+.infiniqueryResultsTable td{
+	vertical-align:middle;
+		background:-o-linear-gradient(bottom, #fff0dc 5%, #baba64 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fff0dc), color-stop(1, #baba64) ); 
+	background:-moz-linear-gradient( center top, #fff0dc 5%, #baba64 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#fff0dc", endColorstr="#baba64");	background: -o-linear-gradient(top,#fff0dc,baba64);
+
+	background-color:#fff0dc;
+
+	border:1px solid #000000;
+	border-width:0px 1px 1px 0px;
+	text-align:left;
+	padding:7px;
+	font-size:10px;
+	font-family:Arial;
+	font-weight:normal;
+	color:#000000;
+}.infiniqueryResultsTable tr:last-child td{
+	border-width:0px 1px 0px 0px;
+}.infiniqueryResultsTable tr td:last-child{
+	border-width:0px 0px 1px 0px;
+}.infiniqueryResultsTable tr:last-child td:last-child{
+	border-width:0px 0px 0px 0px;
 }
+.infiniqueryResultsTable tr:first-child td{
+		background:-o-linear-gradient(bottom, #828239 5%, #7f7f00 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #828239), color-stop(1, #7f7f00) );
+	background:-moz-linear-gradient( center top, #828239 5%, #7f7f00 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#828239", endColorstr="#7f7f00");	background: -o-linear-gradient(top,#828239,7f7f00);
+
+	background-color:#828239;
+	border:0px solid #000000;
+	text-align:center;
+	border-width:0px 0px 1px 1px;
+	font-size:14px;
+	font-family:Arial;
+	font-weight:bold;
+	color:#ffffff;
+}
+.infiniqueryResultsTable tr:first-child:hover td{
+	background:-o-linear-gradient(bottom, #828239 5%, #7f7f00 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #828239), color-stop(1, #7f7f00) );
+	background:-moz-linear-gradient( center top, #828239 5%, #7f7f00 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#828239", endColorstr="#7f7f00");	background: -o-linear-gradient(top,#828239,7f7f00);
+
+	background-color:#828239;
+}
+.infiniqueryResultsTable tr:first-child td:first-child{
+	border-width:0px 0px 1px 0px;
+}
+.infiniqueryResultsTable tr:first-child td:last-child{
+	border-width:0px 0px 1px 1px;
+}
+
+
+/******* end of results table ***********/
+
+
+
 .infiniqueryResultsDivCloseButton {
 	width: 70px;
 	height:20px;
