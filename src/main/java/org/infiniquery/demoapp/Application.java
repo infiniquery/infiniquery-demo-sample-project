@@ -29,10 +29,16 @@ package org.infiniquery.demoapp;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.EntityManager;
+
+import org.infiniquery.connector.JpaConnector;
+import org.infiniquery.service.DefaultDatabaseAccessService;
+import org.infiniquery.service.DefaultQueryModelService;
 import org.infiniquery.service.SecurityService;
 import org.infiniquery.web.spring.controller.QueryModelController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.orm.jpa.EntityScan;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -40,6 +46,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan({"org.infiniquery.web.spring.controller"})
+@EntityScan(basePackages={"org.infiniquery.demoapp.entities"})
 public class Application {
 
     public static void main(String[] args) {
@@ -61,7 +68,21 @@ public class Application {
     	};
     	
     	QueryModelController queryModelController = appContext.getBean(QueryModelController.class);
-    	queryModelController.getQueryModelService().setSecurityService(securityService);
+    	DefaultQueryModelService queryModelService = new DefaultQueryModelService();
+    	DefaultDatabaseAccessService databaseAccessService = new DefaultDatabaseAccessService();
+
+/*
+    	//inject your own entity manager if you don't want to go with a different one in infiniquery than the rest of your app.
+    	//If you leave these lines commented, infiniquery will create its own entity manager.
+    	EntityManager entityManager = appContext.getBean(EntityManager.class);
+    	JpaConnector.setEntityManager(entityManager);
+    	databaseAccessService.setEntityManager(entityManager);
+ */
+    	
+    	queryModelService.setDatabaseAccessService(databaseAccessService);
+    	queryModelService.setSecurityService(securityService);
+    	
+    	queryModelController.setQueryModelService(queryModelService);
 
     }
 

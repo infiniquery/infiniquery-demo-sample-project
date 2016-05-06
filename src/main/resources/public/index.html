@@ -34,11 +34,27 @@
     <link rel="stylesheet" type="text/css" href="infiniquery.css" />
     <script type="text/javascript" src="datetimepicker/datetimepicker_css.js"></script>
     <script type="text/javascript" src="infiniquery.js"></script>
+    <script type="text/javascript">
+    	var applicationRootURL = "/infiniqueryDemoApp";
+		function onLoadHandler() {
+			var applicationRootURL = parent.applicationRootURL;
+		    infiniquery.findKeywordEndpoint = applicationRootURL + infiniquery.findKeywordEndpoint;
+		    infiniquery.entitiesEndpoint = applicationRootURL + infiniquery.entitiesEndpoint;
+		    infiniquery.entityAttributesEndpoint = applicationRootURL + infiniquery.entityAttributesEndpoint;
+		    infiniquery.entityAttributeOperatorsEndpoint = applicationRootURL + infiniquery.entityAttributeOperatorsEndpoint;
+		    infiniquery.entityAttributeOperatorValueEndpoint = applicationRootURL + infiniquery.entityAttributeOperatorValueEndpoint;
+		    infiniquery.conditionSeparatorValuesEndpoint = applicationRootURL + infiniquery.conditionSeparatorValuesEndpoint;
+		    infiniquery.compileQueryEndpoint = applicationRootURL + infiniquery.compileQueryEndpoint;
+		    infiniquery.executeQueryEndpoint = applicationRootURL + infiniquery.executeQueryEndpoint;
+
+			infiniquery.startQueryCreation();
+		}
+    </script>
 </head>
-<body onload="infiniquery.startQueryCreation()">
+<body onload="onLoadHandler()">
     <div id="dynamicQueryDiv"></div>
 
-    <input type="button" value="Execute Query" onclick="infiniquery.executeQuery()"/>
+    <input type="button" class="simpleButton" value="Execute Query" onclick="infiniquery.executeQuery()"/>
 </body>
 </html>
 

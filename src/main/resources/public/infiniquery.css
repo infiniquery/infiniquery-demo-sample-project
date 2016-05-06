@@ -25,15 +25,15 @@
 */
 
 #dynamicQueryDiv {
-    margin: 10px 0px 10px 0px;
-    border: inset;
-    border-color: beige;
-    background-color: cornsilk;
-    height: 400px;
-    width: 700px;
-    font-size: 14px;
-    font-weight: bold;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+	 margin: 10px 0px 10px 0px;
+	 border: inset;
+	 border-color: beige;
+	 background-color: #ffffff;
+	 width: 1100px;
+	 height: 500px;
+	 font-size: 14px;
+	 font-weight: bold;
+	 font-family: Cambria, Calibri, Arial, sans-serif;
 }
 #dynamicQueryDiv div {
     float: left;
@@ -42,126 +42,64 @@
 #infiniqueryResultsDiv {
     margin: 0px 0px 0px 0px;
     position:absolute;
-    height: 400px;
-    width: 700px;
+    width: 1100px;
+    height: 500px;
     overflow-x:auto;
     overflow-y:auto;
-    background-color: #E7EBDF;
+    background-color: #efefef;
     border: 1px solid beige;
     visibility:hidden;
     left:0px;
     top:0px;
     font-size: 14px;
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: Cambria, Calibri, Arial, sans-serif;
 }
 
 /******* start of results table ***********/
 
-
 .infiniqueryResultsTable {
-	margin:0px;padding:0px;
-	width:98%;
-	box-shadow: 10px 10px 5px #888888;
-	border:1px solid #000000;
-	
-	-moz-border-radius-bottomleft:6px;
-	-webkit-border-bottom-left-radius:6px;
-	border-bottom-left-radius:6px;
-	
-	-moz-border-radius-bottomright:6px;
-	-webkit-border-bottom-right-radius:6px;
-	border-bottom-right-radius:6px;
-	
-	-moz-border-radius-topright:6px;
-	-webkit-border-top-right-radius:6px;
-	border-top-right-radius:6px;
-	
-	-moz-border-radius-topleft:6px;
-	-webkit-border-top-left-radius:6px;
-	border-top-left-radius:6px;
-}.infiniqueryResultsTable table{
-    border-collapse: collapse;
-        border-spacing: 0;
-	width:100%;
-	height:100%;
-	margin:0px;padding:0px;
-}.infiniqueryResultsTable tr:last-child td:last-child {
-	-moz-border-radius-bottomright:6px;
-	-webkit-border-bottom-right-radius:6px;
-	border-bottom-right-radius:6px;
+	border: 1px solid #e3e3e3;
+	background-color: #f2f2f2;
+        width: 100%;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
 }
-.infiniqueryResultsTable table tr:first-child td:first-child {
-	-moz-border-radius-topleft:6px;
-	-webkit-border-top-left-radius:6px;
-	border-top-left-radius:6px;
+.infiniqueryResultsTable tr:first-child {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	padding: .2em 0 .2em .5em;
+	text-align: left;
+	color: #4B4B4B;
+	background-color: #C8C8C8;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#e3e3e3), color-stop(.6,#B3B3B3));
+	background-image: -moz-linear-gradient(top, #D6D6D6, #B0B0B0, #B3B3B3 90%);
+	border-bottom: solid 1px #999;
 }
-.infiniqueryResultsTable table tr:first-child td:last-child {
-	-moz-border-radius-topright:6px;
-	-webkit-border-top-right-radius:6px;
-	border-top-right-radius:6px;
-}.infiniqueryResultsTable tr:last-child td:first-child{
-	-moz-border-radius-bottomleft:6px;
-	-webkit-border-bottom-left-radius:6px;
-	border-bottom-left-radius:6px;
-}.infiniqueryResultsTable tr:hover td{
-	background-color:#baba64;
-		
-
+.infiniqueryResultsTable tr:first-child td {
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 17px;
+	line-height: 20px;
+	font-style: normal;
+	font-weight: normal;
+	text-align: left;
+	text-shadow: white 1px 1px 1px;
+	padding: 5px;
+	color: #333;
 }
-.infiniqueryResultsTable td{
-	vertical-align:middle;
-		background:-o-linear-gradient(bottom, #fff0dc 5%, #baba64 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fff0dc), color-stop(1, #baba64) ); 
-	background:-moz-linear-gradient( center top, #fff0dc 5%, #baba64 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#fff0dc", endColorstr="#baba64");	background: -o-linear-gradient(top,#fff0dc,baba64);
-
-	background-color:#fff0dc;
-
-	border:1px solid #000000;
-	border-width:0px 1px 1px 0px;
-	text-align:left;
-	padding:7px;
-	font-size:10px;
-	font-family:Arial;
-	font-weight:normal;
-	color:#000000;
-}.infiniqueryResultsTable tr:last-child td{
-	border-width:0px 1px 0px 0px;
-}.infiniqueryResultsTable tr td:last-child{
-	border-width:0px 0px 1px 0px;
-}.infiniqueryResultsTable tr:last-child td:last-child{
-	border-width:0px 0px 0px 0px;
+.infiniqueryResultsTable td {
+	line-height: 20px;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	border-bottom: 1px solid #fff;
+	border-top: 1px solid #fff;
+	padding: 5px;
+	color: #333;
 }
-.infiniqueryResultsTable tr:first-child td{
-		background:-o-linear-gradient(bottom, #828239 5%, #7f7f00 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #828239), color-stop(1, #7f7f00) );
-	background:-moz-linear-gradient( center top, #828239 5%, #7f7f00 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#828239", endColorstr="#7f7f00");	background: -o-linear-gradient(top,#828239,7f7f00);
-
-	background-color:#828239;
-	border:0px solid #000000;
-	text-align:center;
-	border-width:0px 0px 1px 1px;
-	font-size:14px;
-	font-family:Arial;
-	font-weight:bold;
-	color:#ffffff;
+.infiniqueryResultsTable td:hover {
+	background-color: #fff;
 }
-.infiniqueryResultsTable tr:first-child:hover td{
-	background:-o-linear-gradient(bottom, #828239 5%, #7f7f00 100%);	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #828239), color-stop(1, #7f7f00) );
-	background:-moz-linear-gradient( center top, #828239 5%, #7f7f00 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr="#828239", endColorstr="#7f7f00");	background: -o-linear-gradient(top,#828239,7f7f00);
-
-	background-color:#828239;
-}
-.infiniqueryResultsTable tr:first-child td:first-child{
-	border-width:0px 0px 1px 0px;
-}
-.infiniqueryResultsTable tr:first-child td:last-child{
-	border-width:0px 0px 1px 1px;
-}
-
 
 /******* end of results table ***********/
-
 
 
 .infiniqueryResultsDivCloseButton {
@@ -291,63 +229,72 @@
 .findKeyword {
     color: #0617CF;
     font: inherit;
-    font-style: italic;
     height: 20px;
     padding: 2px 3px 2px 2px;
 }
 .havingKeyword {
     color: #0617CF;
     font: inherit;
-    font-style: italic;
     height: 20px;
     padding: 2px 3px 2px 2px;
 }
 .operatorKeyword {
     color: #0617CF;
     font: inherit;
-    font-style: italic;
     height: 20px;
     padding: 2px 3px 2px 2px;
 }
 .conditionSeparatorKeyword {
     color: #0617CF;
     font: inherit;
-    font-style: italic;
     height: 20px;
     padding: 2px 3px 2px 2px;
 }
 .openBracket {
     color: #E8000C;
     font: inherit;
-    font-style: italic;
     height: 20px;
     padding: 2px 3px 2px 2px;
 }
 .closeBracket {
     color: #E8000C;
     font: inherit;
-    font-style: italic;
     height: 20px;
     padding: 2px 3px 2px 2px;
 }
 .entityName {
     color: #BF0808;
     font: inherit;
-    font-style: italic;
     height: 20px;
     padding: 2px 3px 2px 2px;
 }
 .entityAttributeName {
     color: #E65353;
     font: inherit;
-    font-style: italic;
     height: 20px;
     padding: 2px 3px 2px 2px;
 }
 .entityAttributeValue {
     color: #518531;
     font: inherit;
-    font-style: italic;
     height: 20px;
     padding: 2px 3px 2px 2px;
+}
+
+input.simpleButton {
+	border-radius: 5px 5px 5px 5px;
+    background: #CCC; /* For browsers that do not support gradients */
+		background: -webkit-linear-gradient(#CCC, #AAA); /* For Safari 5.1 to 6.0 */
+		background: -o-linear-gradient(#CCC, #AAA); /* For Opera 11.1 to 12.0 */
+		background: -moz-linear-gradient(#CCC, #AAA); /* For Firefox 3.6 to 15 */
+		background: linear-gradient(#CCC, #AAA); /* Standard syntax */
+	font-family: Cambria;
+	color: #222;
+	width: 150px;
+	height: 25px;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 5px 10px 0 rgba(0,0,0,0.19);
+}
+input.simpleButton:hover {
+	background-color:#DDD;
+	box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 8px 10px 0 rgba(0,0,0,0.19);
 }

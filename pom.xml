@@ -6,12 +6,12 @@
 
     <groupId>infiniquery</groupId>
     <artifactId>infiniquery-demo-sample-project</artifactId>
-    <version>1.0-ALPHA</version>
+    <version>1.1-RC</version>
     <packaging>jar</packaging>
 
     <name>Infiniquery Demo Sample Project</name>
     <description>A sample web application showing the features of Infiniquery in action.</description>
-    <url>todo</url>
+    <url>http://www.infiniquery.org/</url>
 
     <licenses>
         <license>
@@ -30,23 +30,26 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.2.1.RELEASE</version>
+        <version>1.3.3.RELEASE</version>
     </parent>
+    
+    <properties>
+    	<org.springframework.version>4.2.5.RELEASE</org.springframework.version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.infiniquery</groupId>
-            <artifactId>infiniquery-core</artifactId>
-            <version>1.0-ALPHA</version>
-        </dependency>
-        <dependency>
-            <groupId>org.infiniquery</groupId>
             <artifactId>infiniquery-web-spring</artifactId>
-            <version>1.0-ALPHA</version>
+            <version>1.1-RC</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -58,5 +61,44 @@
 			<version>2.3.3</version>
 		</dependency>
     </dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>

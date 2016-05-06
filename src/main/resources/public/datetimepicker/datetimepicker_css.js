@@ -70,6 +70,7 @@ var MonthName = ["January", "February", "March", "April", "May", "June", "July",
 var WeekDayName1 = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 var WeekDayName2 = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
+var dateTimePickerCallback = function() {};
 
 //end Configurable parameters
 
@@ -833,7 +834,7 @@ function RenderCssCal(bNewCal)
 	funcCalback += " CalId.value+=' '+Cal.getShowHour()+':'+Cal.Minutes;";
 	funcCalback += " if (Cal.ShowSeconds)  CalId.value+=':'+Cal.Seconds;";
 	funcCalback += " if (TimeMode === 12)  CalId.value+=''+Cal.getShowAMorPM();";
-	funcCalback += "}if(CalId.onchange!=undefined) CalId.onchange();CalId.focus();winCal.style.visibility='hidden';}";
+	funcCalback += "}if(CalId.onchange!=undefined) CalId.onchange();CalId.focus();winCal.style.visibility='hidden';dateTimePickerCallback();}";
 
 
 	// determines if there is enough space to open the cal above the position where it is called

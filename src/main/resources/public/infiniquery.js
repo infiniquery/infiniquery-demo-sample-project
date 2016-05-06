@@ -38,6 +38,15 @@ var infiniquery = {
     contextMenuDiv : null,
     openBracketsLevel : 0,  //means no bracket is open
     lastEntityName : null,
+    findKeywordEndpoint : "/queryModel/findKeyword",
+    entitiesEndpoint : "/queryModel/entities",
+    entityAttributesEndpoint : "/queryModel/entityAttributes/",
+    entityAttributeOperatorsEndpoint : "/queryModel/entityAttributeOperators/",
+    entityAttributeOperatorValueEndpoint : "/queryModel/entityAttributeOperatorValue/",
+    conditionSeparatorValuesEndpoint: "/queryModel/conditionSeparatorValues",
+    compileQueryEndpoint : "/queryModel/compileQuery",
+    executeQueryEndpoint : "/queryModel/executeQuery",
+    NOT_IMPLEMENTED_MESSAGE : "This feature will be supported in future versions of infiniquery.",
 
     startQueryCreation: function () {
     	infiniquery.initialize();
@@ -79,6 +88,9 @@ var infiniquery = {
     	
     	var resultsDiv = document.createElement("div");
     	resultsDiv.id = "infiniqueryResultsDiv";
+    	var resultsLabelDiv = document.createElement("div");
+    	resultsLabelDiv.id = "resultsLabelDiv";
+    	resultsDiv.appendChild(resultsLabelDiv);
     	var resultsTable = document.createElement("table");
     	resultsTable.id = "infiniqueryResultsTable";
     	resultsTable.className = "infiniqueryResultsTable";
@@ -117,8 +129,9 @@ var infiniquery = {
         	for(var i=0; i<items.length; i++) {
         		infiniquery.addResultsTableRow(table, i + 1, items[i]);
         	}
+        	document.getElementById("resultsLabelDiv").innerHTML = "" + items.length + " results found.";
         } else {
-        	infiniquery.addResultsTableRow(table, 0, "No results found.");
+        	document.getElementById("resultsLabelDiv").innerHTML = "No results found.";
         }
         var queryDiv = infiniquery.queryDiv;
         var resultsDiv = infiniquery.resultsDiv;
@@ -206,7 +219,10 @@ var infiniquery = {
         return "<input id=\"input\" type=\"text\" style=\"width:100px;\" onkeyup=\"infiniquery.defaultInputKeyTyped(this, event)\"/>";
     },
     getDateInputField: function () {
-        return "<input id=\"dateInput\" type=\"text\" style=\"width:130px;\" placeholder=\"dd/MM/yyyy\" onclick=\"javascript:NewCssCal('dateInput','ddMMyyyy','dropdown',true,'24',true)\" />";
+        return "<input id=\"dateInput\" type=\"text\" style=\"width:90px;\" placeholder=\"dd-MM-yyyy\" onclick=\"javascript:NewCssCal('dateInput','dd-MMM-yyyy','dropdown',false,'24',true)\" />";
+    },
+    getDateTimeInputField: function () {
+        return "<input id=\"dateTimeInput\" type=\"text\" style=\"width:130px;\" placeholder=\"dd-MM-yyyy HH:mm:ss\" onclick=\"javascript:NewCssCal('dateTimeInput','dd-MM-yyyy HH:mm:ss','dropdown',true,'24',true)\" />";
     },
     /**
      * Default behavior when key is typed inside the cursor input box
@@ -226,7 +242,7 @@ var infiniquery = {
             infiniquery.autocompleteEntity();
             infiniquery.input().focus();
         };
-        infiniquery.ajaxRequest("/queryModel/findKeyword", "GET", callbackFunction);
+        infiniquery.ajaxRequest(infiniquery.findKeywordEndpoint, "GET", callbackFunction);
     },
 
     autocompleteEntity: function () {
@@ -268,7 +284,7 @@ var infiniquery = {
                 }
             }
         };
-        infiniquery.ajaxRequest("/queryModel/entities", "GET", callbackFunction);
+        infiniquery.ajaxRequest(infiniquery.entitiesEndpoint, "GET", callbackFunction);
         theInput.focus();
     },
 
@@ -326,7 +342,7 @@ var infiniquery = {
                 }
             }
         };
-        infiniquery.ajaxRequest("/queryModel/entityAttributes/" + entityName, "GET", callbackFunction);
+        infiniquery.ajaxRequest(infiniquery.entityAttributesEndpoint + entityName, "GET", callbackFunction);
     },
     applyAttributeSuggestion: function (entityName, attributeName) {
         if(attributeName === "(") {
@@ -387,7 +403,7 @@ var infiniquery = {
                 }
             }
         };
-        infiniquery.ajaxRequest("/queryModel/entityAttributeOperators/" + entityName + "/" + attributeName, "GET", callbackFunction);
+        infiniquery.ajaxRequest(infiniquery.entityAttributeOperatorsEndpoint + entityName + "/" + attributeName, "GET", callbackFunction);
     },
     applyAttributeOperatorSuggestion: function (entityName, attributeName, operatorName) {
         var oldQuery = infiniquery.queryDiv.innerHTML;
@@ -429,7 +445,7 @@ var infiniquery = {
             }
 
         };
-        infiniquery.ajaxRequest("/queryModel/entityAttributeOperatorValue/" + entityName + "/" + attributeName + "/" + operatorName, "GET", callbackFunction);
+        infiniquery.ajaxRequest(infiniquery.entityAttributeOperatorValueEndpoint + entityName + "/" + attributeName + "/" + operatorName, "GET", callbackFunction);
         infiniquery.input().focus();
     },
 
@@ -480,11 +496,12 @@ var infiniquery = {
                 infiniquery.datePickedCallback();
             }
         }
+        dateTimePickerCallback = infiniquery.datePickedCallback;
     },
 
     datePickedCallback: function () {
         var theInput = document.getElementById("dateInput");
-        if(infiniquery.isValidDateTime(theInput.value)) {
+        if(infiniquery.isValidDate(theInput.value)) {
         	infiniquery.queryDiv.innerHTML = infiniquery.getCurrentQueryHtmlWithoutCursor() + infiniquery.getEntityAttributeValueDiv(theInput.value) + infiniquery.getInputField();
             infiniquery.autocompleteConditionSeparatorKeyword(lastEntityName);
         } else {
@@ -493,7 +510,26 @@ var infiniquery = {
     },
 
     displayDateTimeInput: function (entityName, attributeName, operatorName) {
-        alert("Not implemented yet");
+    	infiniquery.queryDiv.innerHTML = infiniquery.getCurrentQueryHtmlWithoutCursor() + infiniquery.getDateTimeInputField();
+        var theInput = document.getElementById("dateTimeInput");
+        lastEntityName = entityName;
+        theInput.click();
+        theInput.onkeyup = function(event) {
+            if (event.keyCode == 13) {
+                infiniquery.dateTimePickedCallback();
+            }
+        }
+        dateTimePickerCallback = infiniquery.dateTimePickedCallback;
+    },
+
+    dateTimePickedCallback: function () {
+        var theInput = document.getElementById("dateTimeInput");
+        if(infiniquery.isValidDateTime(theInput.value)) {
+        	infiniquery.queryDiv.innerHTML = infiniquery.getCurrentQueryHtmlWithoutCursor() + infiniquery.getEntityAttributeValueDiv(theInput.value) + infiniquery.getInputField();
+            infiniquery.autocompleteConditionSeparatorKeyword(lastEntityName);
+        } else {
+            theInput.style.backgroundColor = "red";
+        }
     },
 
     displayReferenceDataInputSingleValue: function (entityName, attributeName, operatorName, possibleValues) {
@@ -587,7 +623,7 @@ var infiniquery = {
                 }
             }
         };
-        infiniquery.ajaxRequest("/queryModel/conditionSeparatorValues", "GET", callbackFunction);
+        infiniquery.ajaxRequest(infiniquery.conditionSeparatorValuesEndpoint, "GET", callbackFunction);
         theInput.focus();
     },
 
@@ -689,10 +725,10 @@ var infiniquery = {
         var table = document.getElementById("contextMenuTable");
         infiniquery.clearAllTableRows(table);
         infiniquery.addContextualTableRow(table, 0, "Select another attribute instead", function() {
-            alert("Not implemented yet");
+            alert(infiniquery.NOT_IMPLEMENTED_MESSAGE);
         });
         infiniquery.addContextualTableRow(table, 1, "Remove entire condition", function() {
-            alert("Not implemented yet");
+            alert(infiniquery.NOT_IMPLEMENTED_MESSAGE);
         });
         infiniquery.addContextualTableRow(table, 2, "Cancel (X)", function() {
             document.getElementById("contextMenuDiv").style.visibility = "hidden";
@@ -707,13 +743,13 @@ var infiniquery = {
         var table = document.getElementById("contextMenuTable");
         infiniquery.clearAllTableRows(table);
         infiniquery.addContextualTableRow(table, 0, "Change operator", function() {
-            alert("Not implemented yet");
+            alert(infiniquery.NOT_IMPLEMENTED_MESSAGE);
         });
         infiniquery.addContextualTableRow(table, 1, "Edit entire condition", function() {
-            alert("Not implemented yet");
+            alert(infiniquery.NOT_IMPLEMENTED_MESSAGE);
         });
         infiniquery.addContextualTableRow(table, 2, "Remove entire condition", function() {
-            alert("Not implemented yet");
+            alert(infiniquery.NOT_IMPLEMENTED_MESSAGE);
         });
         infiniquery.addContextualTableRow(table, 3, "Cancel (X)", function() {
             document.getElementById("contextMenuDiv").style.visibility = "hidden";
@@ -728,13 +764,13 @@ var infiniquery = {
         var table = document.getElementById("contextMenuTable");
         infiniquery.clearAllTableRows(table);
         infiniquery.addContextualTableRow(table, 0, "Change value", function() {
-            alert("Not implemented yet");
+            alert(infiniquery.NOT_IMPLEMENTED_MESSAGE);
         });
         infiniquery.addContextualTableRow(table, 1, "Edit entire condition", function() {
-            alert("Not implemented yet");
+            alert(infiniquery.NOT_IMPLEMENTED_MESSAGE);
         });
         infiniquery.addContextualTableRow(table, 2, "Remove entire condition", function() {
-            alert("Not implemented yet");
+            alert(infiniquery.NOT_IMPLEMENTED_MESSAGE);
         });
         infiniquery.addContextualTableRow(table, 3, "Cancel (X)", function() {
             document.getElementById("contextMenuDiv").style.visibility = "hidden";
@@ -749,7 +785,7 @@ var infiniquery = {
         var table = document.getElementById("contextMenuTable");
         infiniquery.clearAllTableRows(table);
         infiniquery.addContextualTableRow(table, 0, "Change logical operator", function() {
-            alert("Not implemented yet");
+            alert(infiniquery.NOT_IMPLEMENTED_MESSAGE);
         });
         infiniquery.addContextualTableRow(table, 1, "Cancel (X)", function() {
             document.getElementById("contextMenuDiv").style.visibility = "hidden";
@@ -764,10 +800,10 @@ var infiniquery = {
         var table = document.getElementById("contextMenuTable");
         infiniquery.clearAllTableRows(table);
         infiniquery.addContextualTableRow(table, 0, "Change content between parenthesis", function() {
-            alert("Not implemented yet");
+            alert(infiniquery.NOT_IMPLEMENTED_MESSAGE);
         });
         infiniquery.addContextualTableRow(table, 1, "Remove this parenthesis and contents", function() {
-            alert("Not implemented yet");
+            alert(infiniquery.NOT_IMPLEMENTED_MESSAGE);
         });
         infiniquery.addContextualTableRow(table, 2, "Cancel (X)", function() {
             document.getElementById("contextMenuDiv").style.visibility = "hidden";
@@ -866,7 +902,7 @@ var infiniquery = {
 	        var callback = function(jpqlDimension) {
 	        	alert(jpqlDimension);
 	        }
-	        infiniquery.ajaxRequest("/queryModel/compileQuery", "POST", callback, executableQueryString);
+	        infiniquery.ajaxRequest(infiniquery.compileQueryEndpoint, "POST", callback, executableQueryString);
     	} else {
     		alert("Query not valid. Please ensure the sentence is complete and all brackets properly closed.");
     	}
@@ -995,7 +1031,7 @@ var infiniquery = {
     	if(infiniquery.isQueryValid()) {
 	        var executableQuery = new infiniquery.ExecutableQuery(infiniquery.getQueryHtmlDimension(), infiniquery.getQueryPlainTextDimension(), infiniquery.getQueryLogicalDimension());
 	        var executableQueryString = JSON.stringify(executableQuery);
-	        infiniquery.ajaxRequest("/queryModel/executeQuery", "POST", infiniquery.ajaxRequestCallback, executableQueryString);
+	        infiniquery.ajaxRequest(infiniquery.executeQueryEndpoint, "POST", infiniquery.ajaxRequestCallback, executableQueryString);
     	} else {
     		alert("Query not valid. Please ensure the sentence is complete and all brackets properly closed.");
     	}

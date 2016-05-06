@@ -26,8 +26,9 @@
 
 package org.infiniquery.demoapp.entities;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -65,7 +66,7 @@ public class Employee {
 	private Date birthDate;
 
 	@Column(name = "CAREER_STARTED_DATE")
-	private Date careerStartedDate;
+	private Timestamp careerStartedDate;
 
 	@Column(name = "ROLE")
 	private String role;
@@ -100,28 +101,28 @@ public class Employee {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
-	public Date getBirthDate() {
-		return birthDate;
-	}
 	
 	public String getBirthDateString() {
 		return DEFAULT_DATE_FORMAT.format(birthDate);
-	}
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
-
-	public Date getCareerStartedDate() {
-		return careerStartedDate;
 	}
 	
 	public String getCareerStartedDateString() {
 		return DEFAULT_DATE_FORMAT.format(careerStartedDate);
 	}
 
-	public void setCareerStartedDate(Date careerStartedDate) {
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public Timestamp getCareerStartedDate() {
+		return careerStartedDate;
+	}
+
+	public void setCareerStartedDate(Timestamp careerStartedDate) {
 		this.careerStartedDate = careerStartedDate;
 	}
 
