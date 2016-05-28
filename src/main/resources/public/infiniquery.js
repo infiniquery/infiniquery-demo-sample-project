@@ -1003,9 +1003,7 @@ var infiniquery = {
     },
     
     clearSelect: function(selectObj) {
-        for(var i=selectObj.length-1; i>=0; i++) {
-        	selectObj.remove(i);
-        }
+    	selectObj.options.length = 0;
     },
     
     getSelectComaSeparatedSelection: function(selectObj) {
