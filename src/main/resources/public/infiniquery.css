@@ -108,7 +108,9 @@
 }
 #autocompleteTextDiv {
     position:absolute;
-    width:200px;
+    width:220px;
+    height:200px;
+    overflow-x:auto;
     overflow-y:auto;
     visibility:hidden;
     left:0px;
@@ -118,27 +120,16 @@
     width:200px;
 }
 .autocompleteTextTableOddCell {
-    background-color: #d3d3d3;
+    background-color: #e4e4e4;
 }
 .autocompleteTextTableEvenCell {
     background-color: #e4e4e4;
 }
-#autocompleteTextDiv {
-    position:absolute;
-    width:200px;
-    overflow-y:auto;
-    visibility:hidden;
-    left:0px;
-    top:0px;
-}
-#autocompleteTextTable {
-    width:200px;
-}
-.autocompleteTextTableOddCell {
+.autocompleteTextTableOddCell:hover {
     background-color: #d3d3d3;
 }
-.autocompleteTextTableEvenCell {
-    background-color: #e4e4e4;
+.autocompleteTextTableEvenCell:hover {
+    background-color: #d3d3d3;
 }
 #autocompleteReferenceDataDiv {
 	position:absolute;
