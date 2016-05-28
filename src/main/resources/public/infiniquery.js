@@ -122,6 +122,7 @@ var infiniquery = {
 
         queryResult = JSON.parse(queryResult);
         var items = queryResult.items;
+        infiniquery.lastQueryResult = queryResult;
         var table = document.getElementById("infiniqueryResultsTable");
         infiniquery.clearAllTableRows(table);
         if(items && items.length) {
@@ -129,7 +130,7 @@ var infiniquery = {
         	for(var i=0; i<items.length; i++) {
         		infiniquery.addResultsTableRow(table, i + 1, items[i]);
         	}
-        	document.getElementById("resultsLabelDiv").innerHTML = "" + items.length + " results found.";
+        	document.getElementById("resultsLabelDiv").innerHTML = "" + items.length + " " + queryResult.entityName + " found.";
         } else {
         	document.getElementById("resultsLabelDiv").innerHTML = "No results found.";
         }
@@ -403,7 +404,7 @@ var infiniquery = {
                 }
             }
         };
-        infiniquery.ajaxRequest(infiniquery.entityAttributeOperatorsEndpoint + entityName + "/" + attributeName, "GET", callbackFunction);
+        infiniquery.ajaxRequest(infiniquery.entityAttributeOperatorsEndpoint + entityName + "/" + encodeURIComponent(attributeName), "GET", callbackFunction);
     },
     applyAttributeOperatorSuggestion: function (entityName, attributeName, operatorName) {
         var oldQuery = infiniquery.queryDiv.innerHTML;
@@ -426,7 +427,7 @@ var infiniquery = {
                     infiniquery.displayTextInputSingleValue(entityName, attributeName, operatorName);
                     break;
                 case "FREE_TEXT_INPUT_MULTIPLE_VALUES" :
-                    infiniquery.displayTextInputMultipleValues(entityName, attributeName, operatorName);
+                    infiniquery.displayReferenceDataInputMultipleValues(entityName, attributeName, operatorName, possibleValuesView.possibleValues);
                     break;
                 case "DATE_INPUT" :
                     infiniquery.displayDateInput(entityName, attributeName, operatorName);
@@ -480,10 +481,6 @@ var infiniquery = {
                 }
             }
         }
-    },
-
-    displayTextInputMultipleValues: function (entityName, attributeName, operatorName) {
-        alert("Not implemented yet");
     },
 
     displayDateInput: function (entityName, attributeName, operatorName) {

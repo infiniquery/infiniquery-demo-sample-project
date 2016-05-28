@@ -26,9 +26,14 @@
 
 package org.infiniquery.demoapp.entities;
 
+import static java.util.Calendar.DATE;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
+
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.sql.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -70,6 +75,18 @@ public class Employee {
 
 	@Column(name = "ROLE")
 	private String role;
+
+	@Column(name = "INTERNAL_GRADE")
+	private String internalGrade;
+
+	@Column(name = "PRODUCTIVITY_FACTOR")
+	private int productivityFactor;
+
+	@Column(name = "MONTHLY_SALARY")
+	private Double monthlySalary;
+
+	@Column(name = "ACTIVE")
+	private boolean active;
 
 	@OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
 	private List<EmployeeExpertise> expertise;
@@ -148,5 +165,53 @@ public class Employee {
 
 	public void setDepartment(Department department) {
 		this.department = department;
+	}
+
+	public String getInternalGrade() {
+		return internalGrade;
+	}
+
+	public void setInternalGrade(String internalGrade) {
+		this.internalGrade = internalGrade;
+	}
+
+	public int getProductivityFactor() {
+		return productivityFactor;
+	}
+
+	public void setProductivityFactor(int productivityFactor) {
+		this.productivityFactor = productivityFactor;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public Double getMonthlySalary() {
+		return monthlySalary;
+	}
+
+	public void setMonthlySalary(Double monthlySalary) {
+		this.monthlySalary = monthlySalary;
+	}
+	
+	public Integer getAge() {
+		if(this.birthDate == null) {
+			return null;
+		} else {
+			Calendar then = Calendar.getInstance();
+			Calendar now = Calendar.getInstance();
+			then.setTime(birthDate);
+		    int diff = now.get(YEAR) - then.get(YEAR);
+		    if (then.get(MONTH) > now.get(MONTH) || 
+		        (then.get(MONTH) == now.get(MONTH) && then.get(DATE) > now.get(DATE))) {
+		        diff--;
+		    }
+		    return diff;
+		}
 	}
 }

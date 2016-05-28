@@ -48,6 +48,54 @@
 		    infiniquery.executeQueryEndpoint = applicationRootURL + infiniquery.executeQueryEndpoint;
 
 			infiniquery.startQueryCreation();
+			
+			/**** Below we show that it is possible to add dynamic behavior into result table cells ****/
+			
+        	infiniquery.addResultsTableRow = function(table, rowIndex, object) {
+                var row = table.insertRow(rowIndex);
+                object = object["attributesMap"];
+                for (var property in object) {
+                    if (object.hasOwnProperty(property)) {
+                        var cell = row.insertCell(0);
+                        cell.innerHTML = decodeOutputData(property, object[property]);
+                    }
+                }
+            }
+        	infiniquery.addResultsTableHeader = function(table, object) {
+                var row = table.insertRow(0);
+                object = object["attributesMap"];
+                for (var property in object) {
+                    if (object.hasOwnProperty(property)) {
+                        var cell = row.insertCell(0);
+                        if("id" == property) {
+                        	cell.innerHTML = "file";
+                        } else {
+                        	cell.innerHTML = property;
+                        }
+                    }
+                }
+            }
+	    	function decodeOutputData(property, value) {
+	    		if(! value) {
+	    			return value;
+	    		}
+	    		if("last name" == property) {
+	    			value = value.toUpperCase();
+	    			return value;
+	    		} else if("productivity factor" == property) {
+	    			if(value >= 3) {
+	    				return value;
+	    			} else {
+	    				return "<span style='color:red;'>" + value + "</span>";
+	    			}
+	    		} else if("age" == property) {
+	    			return value + " years";
+	    		} else if ("more info" == property) {
+	    			return "<a href='javascript:alert(\"You can implement your own code for this functionality.\n Record ID=" + value + ". Entity type: " + infiniquery.lastQueryResult.entityName + " \")'>download</a>";
+	    		} else {
+	    			return value;
+	    		}
+	    	}
 		}
     </script>
 </head>

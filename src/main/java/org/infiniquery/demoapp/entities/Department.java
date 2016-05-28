@@ -43,6 +43,9 @@ public class Department {
 	@Column(name = "DEPARTMENT_NAME")
 	private String departmentName;
 
+	@Column(name = "STATUS")
+	private String status;
+
 	@OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
 	private List<Employee> employees;
 
@@ -68,5 +71,13 @@ public class Department {
 
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 }

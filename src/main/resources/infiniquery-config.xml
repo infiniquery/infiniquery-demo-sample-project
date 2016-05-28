@@ -1,48 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!DOCTYPE query-context [
-        <!ELEMENT query-context (findKeyword|entities|results-limit)*>
-        <!ELEMENT findKeyword (#PCDATA)>
-        <!ELEMENT results-limit (#PCDATA)>
-        <!ELEMENT entities (entity)*>
-        <!ELEMENT entity (attribute)*>
-        <!ATTLIST entity
-                className CDATA #REQUIRED
-                displayName CDATA #REQUIRED
-                roles CDATA #IMPLIED>
-        <!ELEMENT attribute (#PCDATA)>
-        <!ATTLIST attribute
-                attributeName CDATA #REQUIRED
-                displayName CDATA #REQUIRED
-                possibleValueLabelAttribute CDATA #IMPLIED
-                possibleValueLabelAttributePath CDATA #IMPLIED
-                possibleValuesQuery CDATA #IMPLIED
-                roles CDATA #IMPLIED
-                displayOnly CDATA #IMPLIED>
-        ]>
+<!DOCTYPE note [
+	<!ELEMENT query-context (findKeyword|entities|results-limit)*>
+	<!ELEMENT findKeyword (#PCDATA)>
+	<!ELEMENT results-limit (#PCDATA)>
+	<!ELEMENT entities (entity)*>
+	<!ELEMENT entity (attribute)*>
+	<!ATTLIST entity
+	        className CDATA #REQUIRED
+	        displayName CDATA #REQUIRED
+	        roles CDATA #IMPLIED>
+	<!ELEMENT attribute (#PCDATA)>
+	<!ATTLIST attribute
+	        attributeName CDATA #REQUIRED
+	        displayName CDATA #REQUIRED
+	        possibleValueLabelAttribute CDATA #IMPLIED
+	        possibleValueLabelAttributePath CDATA #IMPLIED
+	        possibleValuesQuery CDATA #IMPLIED
+	        roles CDATA #IMPLIED
+	        displayOnly CDATA #IMPLIED
+	        scope (query|results|all) #IMPLIED
+	        >
+]>
 
 <query-context>
-	<findKeyword>Search for</findKeyword>
+	<findKeyword>Find</findKeyword>
 	<results-limit>1000</results-limit>
 	<entities>
 		<entity className="org.infiniquery.demoapp.entities.Employee" displayName="Employees" roles="ADMIN, SECRETARY, MANAGER">
 			<attribute attributeName="firstName" displayName="first name"/>
 			<attribute attributeName="lastName" displayName="last name"/>
-			<attribute attributeName="expertise" displayName="areas of expertise" possibleValuesQuery="select a from ExperienceArea a" possibleValueLabelAttribute="areaName" possibleValueLabelAttributePath="expertise.experienceArea.areaName"/>
-			<attribute attributeName="department" displayName="department" possibleValuesQuery="select d from Department d" possibleValueLabelAttribute="departmentName" possibleValueLabelAttributePath="department.departmentName"/>
-			<attribute attributeName="birthDate" displayName="birth date" roles="ADMIN"/>
-			<attribute attributeName="careerStartedDate" displayName="career started date" roles="MANAGER"/>
-			<attribute attributeName="id" displayName="id" displayOnly="true"/>
-			<attribute attributeName="birthDateString" displayName="formatted birth date" displayOnly="true"/>
-			<attribute attributeName="careerStartedDateString" displayName="formatted career started date" displayOnly="true"/>
+			<attribute attributeName="internalGrade" displayName="grade" scope="results"/>
+			<attribute attributeName="expertise" displayName="areas of expertise" scope="query" possibleValuesQuery="select a from ExperienceArea a" possibleValueLabelAttribute="areaName" possibleValueLabelAttributePath="expertise.experienceArea.areaName"/>
+			<attribute attributeName="department" displayName="department" scope="query" possibleValuesQuery="select d from Department d" possibleValueLabelAttribute="departmentName" possibleValueLabelAttributePath="department.departmentName"/>
+			<attribute attributeName="birthDate" displayName="birth date" scope="query" roles="ADMIN"/>
+			<attribute attributeName="age" displayName="age" scope="results"/>
+			<attribute attributeName="careerStartedDate" displayName="career started date and time" scope="query" roles="MANAGER"/>
+			<attribute attributeName="careerStartedDateString" displayName="career started date" scope="results"/>
+			<attribute attributeName="internalGrade" displayName="internal grade" scope="query" possibleValuesQuery="select distinct e.internalGrade from Employee e" />
+			<attribute attributeName="productivityFactor" displayName="productivity factor" scope="all"/>
+			<attribute attributeName="monthlySalary" displayName="salary (monthly)"/>
+			<attribute attributeName="id" displayName="more info" scope="results"/>
 		</entity>
 		<entity className="org.infiniquery.demoapp.entities.ExperienceArea" displayName="Experience areas" roles="ALL">
 			<attribute attributeName="areaName" displayName="area name"/>
-			<attribute attributeName="id" displayName="id" displayOnly="true"/>
 		</entity>
 		<entity className="org.infiniquery.demoapp.entities.Department" displayName="Departments" >
 			<attribute attributeName="departmentName" displayName="department name"/>
-			<attribute attributeName="id" displayName="id" displayOnly="true"/>
+			<attribute attributeName="status" displayName="status" possibleValuesQuery="select distinct d.status from Department d"/>
 		</entity>
 	</entities>
 </query-context>
