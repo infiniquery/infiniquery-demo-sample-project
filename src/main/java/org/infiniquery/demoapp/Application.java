@@ -26,12 +26,11 @@
 
 package org.infiniquery.demoapp;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
-import javax.persistence.EntityManager;
-
-import org.infiniquery.connector.JpaConnector;
 import org.infiniquery.service.DefaultDatabaseAccessService;
 import org.infiniquery.service.DefaultQueryModelService;
 import org.infiniquery.service.SecurityService;
@@ -63,6 +62,16 @@ public class Application {
 				return new HashSet<String>() {{
 					add("ADMIN");
 					add("MANAGER");
+				}};
+			}
+			@Override
+			public Map<String, Object> getGlobalScopeAttributes() {
+				return new HashMap<String, Object> () {{
+					//This is a sample hardcoded value. In a real production application, 
+					//you should add code that provides the real identifier of the logged user's department.
+					put("currentUserDepartmentId", new Long(1));
+					//You can add here any information that you want to be accessible in the
+					//additionalFilter of the JpaEntity tag in infiniquery-config.xml
 				}};
 			}
     	};

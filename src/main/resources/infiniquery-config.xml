@@ -9,7 +9,8 @@
 	<!ATTLIST entity
 	        className CDATA #REQUIRED
 	        displayName CDATA #REQUIRED
-	        roles CDATA #IMPLIED>
+	        roles CDATA #IMPLIED
+	        additionalFilter CDATA #IMPLIED>
 	<!ELEMENT attribute (#PCDATA)>
 	<!ATTLIST attribute
 	        attributeName CDATA #REQUIRED
@@ -27,7 +28,7 @@
 	<findKeyword>Find</findKeyword>
 	<results-limit>1000</results-limit>
 	<entities>
-		<entity className="org.infiniquery.demoapp.entities.Employee" displayName="Employees" roles="ADMIN, SECRETARY, MANAGER">
+		<entity className="org.infiniquery.demoapp.entities.Employee" displayName="Employees" roles="ADMIN, SECRETARY, MANAGER" additionalFilter="x.department.id = ${currentUserDepartmentId}">
 			<attribute attributeName="firstName" displayName="first name"/>
 			<attribute attributeName="lastName" displayName="last name"/>
 			<attribute attributeName="internalGrade" displayName="grade" scope="results"/>
